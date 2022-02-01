@@ -1,6 +1,7 @@
 #' @author HLS
 #' @title xpull_json
 #' @details code to pull data from XMART into R - NOT EXPORTED
+#' @param table - what table should be pulled
 #' @param auth - authorisation package
 #' @param use_ext - use cached data? (downloads faster, slightly out of date)
 #' @param mart - which mart should be used? NCOV by default

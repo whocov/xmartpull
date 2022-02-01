@@ -11,9 +11,9 @@ xpull_csv(table, auth, use_ext = FALSE, mart = "NCOV")
 
 \item{auth}{- authorisation package}
 
-\item{mart}{- which mart should be used? NCOV by default}
+\item{use_ext}{- use cached data? (downloads faster, slightly out of date)}
 
-\item{cached}{- use cached data? (downloads faster, slightly out of date)}
+\item{mart}{- which mart should be used? NCOV by default}
 }
 \description{
 xpull_csv

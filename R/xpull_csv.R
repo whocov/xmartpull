@@ -3,7 +3,7 @@
 #' @details code to pull data from XMART into R via csv - FASTER, doesn't give column types
 #' @param  table - the name of the table on xmart to be used
 #' @param auth - authorisation package
-#' @param cached - use cached data? (downloads faster, slightly out of date)
+#' @param use_ext - use cached data? (downloads faster, slightly out of date)
 #' @param mart - which mart should be used? NCOV by default
 
 xpull_csv <- function(table, auth, use_ext = FALSE, mart = "NCOV") {

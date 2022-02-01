@@ -7,6 +7,8 @@
 xpull_json(table, auth, use_ext = FALSE, mart = "NCOV")
 }
 \arguments{
+\item{table}{- what table should be pulled}
+
 \item{auth}{- authorisation package}
 
 \item{use_ext}{- use cached data? (downloads faster, slightly out of date)}
