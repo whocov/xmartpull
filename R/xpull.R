@@ -25,8 +25,11 @@
      "use_cache",
      "base_url"
    )
-
-   walk(resource_reqs, check_auth, names(auth))
+  if (!use_ext) {
+    walk(resource_reqs, check_auth, names(auth))
+  } else {
+    auth = NULL
+  }
 
   if (format == "json") {
     xpull_json(table, auth, use_ext, mart)
