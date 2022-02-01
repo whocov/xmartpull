@@ -11,7 +11,7 @@ xpull_csv <- function(table, auth, use_ext = FALSE, mart = "NCOV") {
   if (use_ext) {
     comp_url <- paste0("https://frontdoor-l4uikgap6gz3m.azurefd.net/", mart, "/")
   } else {
-    comp_url <- paste0("https://extranet.who.int/xmart-api/odata/", mart, "/")
+    comp_url <- paste0(auth$base_url, mart, "/")
   }
 
 

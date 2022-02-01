@@ -28,7 +28,7 @@ xpull_json <- function(table, auth, use_ext = FALSE, mart = "NCOV") {
     bearer <- paste("Bearer", access_token)
     headers <- add_headers(Authorization = bearer)
     cached <- FALSE
-    base_url <- "https://extranet.who.int/xmart-api/odata/"
+    base_url <- auth$base_url
   } else {
     headers <- NULL
     base_url <- "https://frontdoor-l4uikgap6gz3m.azurefd.net/"
