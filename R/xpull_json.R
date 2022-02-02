@@ -16,7 +16,7 @@ xpull_json <- function(table, auth, use_ext = FALSE, mart = "NCOV") {
 
 
 
-  if (use_ext) {
+  if (!use_ext) {
     tok0 <- get_azure_token(resource = auth$resource,
                             tenant = auth$tenant,
                             app = auth$app,
@@ -27,7 +27,6 @@ xpull_json <- function(table, auth, use_ext = FALSE, mart = "NCOV") {
     access_token <- tok0$credentials$access_token
     bearer <- paste("Bearer", access_token)
     headers <- add_headers(Authorization = bearer)
-    cached <- FALSE
     base_url <- auth$base_url
   } else {
     headers <- NULL

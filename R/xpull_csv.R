@@ -18,13 +18,13 @@ xpull_csv <- function(table, auth, use_ext = FALSE, mart = "NCOV") {
   has_params <- grepl("\\?\\$", table)
 
   if (has_params) {
-    appended_link <- "&$format=csv"
+    appended_link <- "?$format=csv"
   } else {
     appended_link <- "?$format=csv"
   }
 
 
-  if (use_ext) {
+  if (!use_ext) {
     tok0 <- get_azure_token(resource = auth$resource,
                             tenant = auth$tenant,
                             app = auth$app,
@@ -35,11 +35,11 @@ xpull_csv <- function(table, auth, use_ext = FALSE, mart = "NCOV") {
     access_token <- tok0$credentials$access_token
     bearer <- paste("Bearer", access_token)
 
-    headers <- add_headers(Authorization = bearer)
-    cached <- FALSE
+    headers <- httr::add_headers(Authorization = bearer)
   } else {
     headers <- NULL
   }
+
 
   if (!is.null(headers)) {
     response <- GET(paste0(comp_url, table, appended_link), headers)
