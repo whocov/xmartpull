@@ -52,7 +52,7 @@ xpull_csv <- function(table, auth, use_ext = FALSE, mart = "NCOV") {
       message("Attempting to read data from XMART")
       parsed <- httr::content(response,
                               type = "text")
-      parsed <- readr::read_csv(parsed)
+      parsed <- suppressWarnings(suppressWarnings(readr::read_csv(parsed, show_col_types = FALSE)))
 
       colnames(parsed) <- str_to_lower(colnames(parsed))
       colnames(parsed) <- gsub("_fk", "", colnames(parsed))
