@@ -28,9 +28,11 @@ xpull_csv <- function(table, auth, use_ext = FALSE, mart = "NCOV") {
     tok0 <- get_azure_token(resource = auth$resource,
                             tenant = auth$tenant,
                             app = auth$app,
-                            auth_type = auth$auth_type,
-                            password = auth$password,
-                            use_cache = auth$use_cache)
+                            # auth_type = auth$auth_type,
+                            auth_type = "client_credentials",
+                            password = auth$password
+                            # use_cache = auth$use_cache,
+                            )
 
     access_token <- tok0$credentials$access_token
     bearer <- paste("Bearer", access_token)

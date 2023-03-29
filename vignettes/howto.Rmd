@@ -1,0 +1,77 @@
+---
+title: "XMARTPULL"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{howto}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo = FALSE,}
+library(xmartpull)
+```
+
+
+# Use of `xmartpull`
+
+The `xmartpull` package is a lightweight package intended for pulling data from the internal WHO database product (XMART) into R. It is primarily concerned with establishing generic connections without user-specific authentication. This is important for group work, and is also a requirement for publishing products on external servers. This package **does not** come pre-packaged with authentication. This has to be supplied separately.
+
+
+## Estabishing a new connection between R and XMART
+
+Any establishment of a connection between R and XMART requires the user to first create a specific app in the WHO Azure active directory, and subsequently define a role in XMART lined to this app. The reading permissions of this app can be defined via the view permission in XMART - the generic authentication credentials established can only read from tables where view permission is established. To perform the XMART side requirements:
+
+1. Follow the SOP [here](https://portal-uat.who.int/xmart4/docs/xmart_api/register_client_app.html#authorize-client-id-at-system-level)
+2. Obtain the following parameters for input into R:
+
+    * **resource** - this is a code that corresponds either to the PROD or UAT XMART environemnts. This can be found via copying the Application ID from the xMART OData API application on the WHO Azure active directory
+  
+        + [PROD API](https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/712b0d0d-f9c5-4b7a-80d6-8a83ee014bca)
+    
+        + [UAT API](https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/b85362d6-c259-490b-bd51-c0a730011bef)
+    
+    * **tenant** - this is shared universally throughout the WHO Azure active directoy. Copy the tenant ID from the site [here](https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/Overview)
+  
+    * **app** This is the Application ID from your created App
+  
+    * **password** - this is the client secret generated as per the SOP above
+  
+    * **base_url** This is one of the following:
+  
+        + https://extranet.who.int/xmart-api/odata/ (PROD)
+    
+        + https://portal-uat.who.int/xmart-api/odata/ (UAT)
+
+
+
+## Pulling data
+
+Pulling data can be perfomed via the following  code:
+
+```{r, echo=TRUE, eval=FALSE}
+
+
+auth_pkg <- list(
+  "resource" = "xxxxx", # corresponds to xmart app (PROD here, can use UAT)
+  "tenant" = "xxxx", # shared across systems - tenant ID under registered app
+  "app" = "xxxx", # Application ID under registered app
+  "password" = "xxxx", # client secret under 
+  "base_url" = "https://extranet.who.int/xmart-api/odata/"
+)
+
+
+xmartpull::xpull(
+  table = "LINELIST",  # the table name in the mart
+  auth = auth_pkg, # authentication package defined above
+  format = "csv", # which format should the API output the data in
+  mart = "MY_MART" # the name of your XMART instance
+)
+
+```

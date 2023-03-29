@@ -20,9 +20,9 @@
      "resource",
      "tenant",
      "app",
-     "auth_type",
+     # "auth_type",
      "password",
-     "use_cache",
+     #"use_cache",
      "base_url"
    )
   if (!use_ext) {
