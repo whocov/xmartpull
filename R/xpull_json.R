@@ -33,7 +33,7 @@ xpull_json <- function(table, auth, use_ext = FALSE, mart = "NCOV") {
     base_url <- "https://frontdoor-l4uikgap6gz3m.azurefd.net/"
   }
 
-  dat <- pull_iter(table, base_url, cached, mart)
+  dat <- pull_iter(table, base_url, headers, mart)
 
 
   if (is.null(dat)) return(NULL)
